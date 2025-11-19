@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Game Awards</title>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js" integrity="sha256-9zljDKpE/mQxmaR4V2cGVaQ7arF3CcXxarvgr7Sj8Uc=" crossorigin="anonymous"></script>
+</head>
+<body class="bg-dark text-white">
+<script src="Hodzic2.js"></script>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="#">Game Awards</a>
+    <button class="btn btn-primary ms-auto" data-bs-toggle="modal" data-bs-target="#dodajIgroModal">Dodaj novo</button>
+    <button class="navbar-toggler" data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">Igre</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#section1">Astro Bot</a></li>
+            <li><a class="dropdown-item" href="#section2">Black Myth Wukong</a></li>
+            <li><a class="dropdown-item" href="#section3">Metaphor:Refantazio</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Main content -->
+<div class="container mt-4">
+  <div class="row">
+    <!-- Main section -->
+    <main class="col-md-6">
+      <h2 class="display-5 text-center mb-4">Najboljše igre</h2>
+      <!-- Game 1 -->
+      <article class="mb-5" id="section1">
+        <p id="uspesnoObvestilo" class="alert alert-success text-center" style="display:none;">
+          Igra uspešno dodana!
+        </p>
+        <h3>Astro Bot <span class="badge bg-warning text-dark">NEW</span></h3>
+        <p><strong>Datum:</strong> 6. september 2024</p>
+        <figure class="figure">
+          <img alt="Astro Bot" class="figure-img img-fluid rounded" src="https://cdn.thegameawards.com/1/2024/11/astro_bot.jpg"/>
+          <figcaption class="figure-caption text-light">Fig1. - Astro Bot</figcaption>
+        </figure>
+        <p>As the titular protagonist Astro...</p>
+        <ul>
+          <li>Razvijalec: TEAM ASOBI</li>
+        </ul>
+        <a class="btn btn-outline-light btn-sm" href="#top">Na vrh</a>
+      </article>
+      <!-- Game 2 -->
+      <article class="mb-5" id="section2">
+        <h3>Black Myth Wukong</h3>
+        <p><strong>Datum:</strong> 19. avgust 2024</p>
+        <figure class="figure">
+          <img alt="Black Myth" class="figure-img img-fluid rounded" src="https://cdn.thegameawards.com/1/2024/11/black_myth.jpg"/>
+          <figcaption class="figure-caption text-light">Fig2. - Black Myth Wukong</figcaption>
+        </figure>
+        <p>Black Myth: Wukong is an action role-playing game...</p>
+        <ul>
+          <li>Razvijalec: Game Science</li>
+        </ul>
+        <a class="btn btn-outline-light btn-sm" href="#top">Na vrh</a>
+      </article>
+      <!-- Game 3 -->
+      <article class="mb-5" id="section3">
+        <h3>Metaphor:Refantazio</h3>
+        <p><strong>Datum:</strong> 11. oktober 2024</p>
+        <figure class="figure">
+          <img alt="Metaphor" class="figure-img img-fluid rounded" src="https://cdn.thegameawards.com/1/2024/11/metaphor.jpg"/>
+          <figcaption class="figure-caption text-light">Fig3. - Metaphor:Refantazio</figcaption>
+        </figure>
+        <ul>
+          <li>Razvijalec: Atlus, Studio Zero</li>
+        </ul>
+        <a class="btn btn-outline-light btn-sm" href="#top">Na vrh</a>
+      </article>
+    </main>
+
+    <!-- Aside -->
+    <aside class="col-md-3 bg-primary text-white p-3 rounded">
+      <div id="otherGamesSection" style="background-color: #0d6efd; padding: 1rem; color: white;">
+      <h4>Ostale dobre igre</h4>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item bg-primary text-white">Balatro</li>
+        <li class="list-group-item bg-primary text-white">Eldenring Shadow of the Erdtree</li>
+        <li class="list-group-item bg-primary text-white">Final Fantasy VII Rebirth</li>
+      </ul>
+        <div style="background-color: white; padding: 0.5rem; border-radius: 8px; overflow-x: auto;">
+        <table class="table table-bordered table-hover text-white">
+        <tbody id="gamesBody">
+        <!-- Dinamično dodane vrstice -->
+        </tbody>
+      </table>
+      </div>
+      </div>
+    </aside>
+
+    <!-- Form -->
+    <div id="vnos-igre" title="Obrazec za dodajanje nove igre" class="col-md-3">
+      <p class="obvestilo-napaka"></p>
+      <section class="mb-5" id="section4">
+        <h2>Vnos nove igre:</h2>
+        <form id="glavniObrazec">
+          <!-- Naslov Igre -->
+          <label for="naslov">Naslov igre:</label>
+          <input type="text" id="naslov" name="naslov" pattern="[A-Za-zČčŠšŽžĐđĆć0-9\s]+" required>
+          <br><br>
+
+          <!-- Kratek opis -->
+          <label for="opis">Kratek opis:</label>
+          <textarea id="opis" name="opis" required></textarea>
+          <br><br>
+
+          <!-- Tip igre (zakomentiran) -->
+          <!--
+          <label for="tip">Tip igre:</label>
+          <select id="tip" name="tip">
+            <option value="akcija">Akcija</option>
+            <option value="RPG">Role playing game</option>
+          </select>
+          <br><br>
+          -->
+
+          <!-- Datum izida (zakomentiran) -->
+          <!--
+          <label for="datum">Datum izida:</label>
+          <input type="date" id="datum" name="datum">
+          <br><br>
+          -->
+
+          <!-- Developer -->
+          <label for="develepers">Developers (vsakega v novo vrstico):</label>
+          <textarea id="develepers" name="develepers" required></textarea>
+          <br><br>
+
+          <!-- Ocena -->
+          <label for="ocena">Ocena: <span id="prikazOcene">5.5</span></label>
+          <input type="range" id="ocena" name="ocena" min="1" max="10" step="0.5" value="5.5" oninput="document.getElementById('prikazOcene').textContent = this.value;">
+          <br><br>
+
+          <!-- URL do slike -->
+          <label for="slika">URL do slike:</label>
+          <input type="text" id="slika" name="slika" required>
+          <br><br>
+
+          <!-- Število nominacij (zakomentirano) -->
+          <!--
+          <label for="nominacije">Število nominacij:</label>
+          <input type="number" id="nominacije" name="nominacije" min="0">
+          <br><br>
+          -->
+
+          <!-- Dobljene nagrade (zakomentirano) -->
+          <!--
+          <label for="nagrade">Dobljene nagrade:</label>
+          <input type="text" id="nagrade" name="nagrade">
+          <br><br>
+          -->
+
+          <button type="submit">Pošlji</button>
+        </form>
+      </section>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="bg-warning text-center text-dark py-3 mt-4">
+  © 2025 Roberto Hodžić. Vse pravice pridržane.
+</footer>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- MODAL: Dodaj novo igro -->
+<div class="modal fade" id="dodajIgroModal" tabindex="-1" aria-labelledby="dodajIgroModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="dodajIgroModalLabel">Dodaj novo igro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Zapri"></button>
+      </div>
+      <div class="modal-body">
+        <form id="modalForma">
+          <div class="mb-3">
+            <label for="modalNaslov" class="form-label">Naslov igre</label>
+            <input type="text" class="form-control" id="modalNaslov" pattern="^[A-Za-z0-9\s]{10,}$" required>
+          </div>
+          <div class="mb-3">
+            <label for="modalOpis" class="form-label">Opis</label>
+            <input type="text" class="form-control" id="modalOpis" required>
+          </div>
+          <div class="mb-3">
+            <label for="modalRazvijalci" class="form-label">Razvijalci (vsakega v novo vrstico)</label>
+            <textarea class="form-control" id="modalRazvijalci" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="modalOcena" class="form-label">Ocena</label>
+            <input type="number" class="form-control" id="modalOcena" min="1" max="10" step="0.5" value="5.5">
+          </div>
+          <div class="mb-3">
+            <label for="modalSlika" class="form-label">URL do slike</label>
+            <input type="text" class="form-control" id="modalSlika" required>
+          </div>
+          <div id="napakaObrazec" class="text-danger mb-2" style="display: none;"></div>
+          <button type="submit" class="btn btn-success">Dodaj igro</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
